@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+<script
+	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<title>Document</title>
+<style>
+.vertical-menu {
+	width: 50px;
+	height: 50px;
+	overflow-y: auto;
+}
+
+.vertical-menu div {
+	background-color: #eee;
+	color: black;
+	display: block;
+	padding: 12px;
+	text-decoration: none;
+}
+
+.vertical-menu {
+	width: 20%;
+	height: 1000px;
+	overflow-y: auto;
+}
+
+.vertical-menu li {
+	background-color: #eee;
+	color: black;
+	display: block;
+	padding: 12px;
+	text-decoration: none;
+	color: black;
+}
+</style>
+</head>
+<body>
+
+	<div class="vertical-menu" style="width: 100%" id="detailjobs">
+		<ul class="list-group" style="width: 100%" id="showArea">
+
+		</ul>
+	</div>
+
+
+
+	<script>
+		/* jQuery(function($) {
+			$('.vertical-menu')
+					.bind(
+							'scroll',
+							function() {
+								if ($(this).scrollTop() + $(this).innerHeight() >= $(this)[0].scrollHeight) {
+									getScroll();
+									// alert("done");
+								}
+							})
+		});
+		 */
+
+		$(window).scroll(
+				function() {
+					if ($(window).scrollTop() == $(document).height()
+							- $(window).height()) {
+						getScroll();
+					}
+				});
+
+		function getScroll() {
+			$.ajax({
+				type : "GET",
+				contentType : "application/json",
+				url : "/paginationapp/getData",
+				dataType : 'json',
+
+				success : function(result) {
+
+					result.forEach(function(index) {
+						/* console.log( index + ": " + $( thi=s ).text() ); */
+
+						$("#showArea").append(
+								"<div class=\"row\">"
+										+ "<div class=\"col-sm-3\">"
+										+ index.title + "</div>"
+										+ "<div class=\"col-sm-3\">"
+										+ index.author + "</div>"
+										+ "<div class=\"col-sm-3\">"
+										+ index.price + "</div>"
+										+ "<div class=\"col-sm-3\">"
+										+ index.description + "</div>
+										+ "<div class=\"col-sm-3\">"
+										+ index.image + "</div>"
+										</div>"
+										
+						)
+
+					});
+				},
+				error : function(e) {
+					console.log(e);
+				}
+			});
+		}
+	</script>
+</body>
+</html>

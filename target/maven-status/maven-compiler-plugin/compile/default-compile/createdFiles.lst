@@ -1,0 +1,5 @@
+com/ranjit/paginationapp/model/BookDetails.class
+com/ranjit/paginationapp/repository/BookRepo.class
+com/ranjit/paginationapp/controller/RequestHandler.class
+com/ranjit/paginationapp/repo/service/DataBaseService.class
+com/ranjit/paginationapp/PaginationApp.class
